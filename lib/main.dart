@@ -1,73 +1,108 @@
+import 'package:ecommerce_nahid/common/widgets/appbar.dart' show FAppBar;
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
+// import '../../../common/widget/appbar.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DIU Mango',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
-
-  // List of widgets to display for each tab
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Home Screen'),
-    Text('Search Screen'),
-    Text('Profile Screen'),
-  ];
-
-  // Function to handle tab changes
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('DIU Mango'),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      appBar: FAppBar(title: "Mega Shop", backButton: true),
+      body: Column(
+        children: [
+          // Poster Section
+          Container(
+            margin: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+            decoration: BoxDecoration(
+              color: Colors.blue, // Background color
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Promo Text
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Gratis Ongkir Selama PPKM!",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      "Periode Mei - Agustus 2021",
+                      style: TextStyle(fontSize: 14, color: Colors.white70),
+                    ),
+                  ],
+                ),
+                // Optional: Icon or Illustration
+                const Icon(Icons.local_shipping, color: Colors.white, size: 40),
+              ],
+            ),
+          ),
+          // Product Card
+          Card(
+            margin: const EdgeInsets.all(8.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 4,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    'assets/images/headphone.png', // Ensure the product image is in assets
+                    width: 200,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "TMA-2 HD Wireless",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const Text(
+                    "Rp. 1.500.000",
+                    style: TextStyle(fontSize: 16, color: Colors.red),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.star, color: Colors.amber),
+                      SizedBox(width: 5),
+                      Text("4.6  86 Reviews"),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
+        type: BottomNavigationBarType.fixed,
+        items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Iconsax.home_outline),
+            label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+            icon: Icon(Iconsax.heart_outline),
+            label: "Wishlist",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Iconsax.shopping_bag_outline),
+            label: "Order",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Iconsax.user_add_bold),
+            label: "Accounts",
           ),
         ],
       ),
